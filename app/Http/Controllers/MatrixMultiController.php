@@ -13,6 +13,7 @@ class MatrixMultiController extends Controller
         $data = $request->input("data");
         $data = json_decode($data);
         $matrix1 = $data->m1;
+
         $matrix2 = $data->m2;
         $key = "ouytuoba";
         // checks if the matrix has always the same column
@@ -20,7 +21,6 @@ class MatrixMultiController extends Controller
         {
             return "Error: Matrix columns should be the same size.";
         }
-
         if(!$this->columnEqualRow($matrix1,$matrix2))
         {
             return "Error: blabla";
@@ -44,16 +44,9 @@ class MatrixMultiController extends Controller
         foreach($matrix as $keyR => $row)
         {
             $fistColumnLength = ($fistColumnLength == null ?  sizeOf($row) : $fistColumnLength);
-            if($fistColumnLength !== sizeOf($row))
+            if($fistColumnLength  !== sizeOf($row))
             {
                 return false;
-            }
-            foreach($row as $keyC => $column)
-            {
-                if(is_int($column) == false)
-                {
-                    return false;
-                }
             }
         }
         return true;
@@ -73,49 +66,18 @@ class MatrixMultiController extends Controller
 
     private function matrixMultiplication($matrix1, $matrix2)
     {
-        $temp = null;
-        //row 
         for($i = 0; $i < sizeOf($matrix1); $i++)
-        {   
-            sizeOf($matrix1[$i]);
-            $q = null;
-            //column
+        {
+            dd($matrix1[$i]);
+
             for($n = 0; $n < sizeOf($matrix1[$i]); $n++)
             {
-                
-                for($k = 0; $k < sizeOf($matrix2[$i]); $k++)
-                {
-                    
-                    if($q == null){
-                        $q = $n;
-                    }
-                    
-                    echo($matrix1[$i][$n]. " * ". $matrix2[$n][$k] . "<br>");
-                    $temp = $matrix1[$i][$n] * $matrix2[$n][$q];
-                    $n++;
-                
-                } 
-                dd($temp);
 
 
-
-
-                echo($matrix1[$i][$n]);
-               
-               
-                // for($k = 0; $k < sizeOf($matrix2[$i]); $k++)
-                // {
-                //     $temp = $temp + $matrix1[$i][$n] * $matrix2[$i][$k];
-                // }
-                // dd($temp);
-                
             }
-            // foreach($matrix1 as $key)
-            // {
-
-            // }
-
         }
+
+
     }
 
     private function matrixToAlpabet($matrix)
