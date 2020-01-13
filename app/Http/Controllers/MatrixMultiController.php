@@ -13,7 +13,7 @@ class MatrixMultiController extends Controller
         $data = $request->input("data");
         $data = json_decode($data);
         $matrix1 = $data->m1;
-
+        
         $matrix2 = $data->m2;
         $key = "ouytuoba";
         // checks if the matrix has always the same column
@@ -25,9 +25,8 @@ class MatrixMultiController extends Controller
         {
             return "Error: blabla";
         }
-        $this->matrixMultiplication($matrix1,$matrix2);
-
-        return "yes";
+        $matrix3 = $this->matrixMultiplication($matrix1,$matrix2);
+        return $this->matrixToAlpabet($matrix3);
     }
 
     /**
@@ -57,35 +56,47 @@ class MatrixMultiController extends Controller
      */
     private function columnEqualRow($matrix1, $matrix2)
     {
-        if(sizeOf($matrix1[0]) == sizeOf($matrix2))
+        if(sizeOf($matrix1) == sizeOf($matrix2[0]))
         {
             return true;
         }
         return false;
+
     }
 
     private function matrixMultiplication($matrix1, $matrix2)
     {
-        for($i = 0; $i < sizeOf($matrix1); $i++)
+        $matrix3 = array();
+        for($i=0; $i < sizeOf($matrix1); $i++)
         {
-            dd($matrix1[$i]);
-
-            for($n = 0; $n < sizeOf($matrix1[$i]); $n++)
+            for($n =0; $n < sizeOf($matrix2[0]); $n++)
             {
-
-
+                $matrix3[$i][$n]=0;
+                for($k= 0; $k < sizeOf($matrix2); $k++)
+                {
+                    $matrix3[$i][$n] += $matrix1[$i][$k]*$matrix2[$k][$n];
+                }
             }
         }
-
-
+        return $matrix3;
     }
 
     private function matrixToAlpabet($matrix)
-    {
-
-
-
-
+    {   
+        $result = array();
+        foreach($matrix as $keyR => $row)
+        {
+            foreach($row as $keyC => $column)
+            {
+                $result[$keyR][$keyC] = $this->integerToChar($column); 
+            }
+        }
     }
 
+    private function integerToChar($param)
+    {
+
+        $rest = 26;
+        dd($rest);
+    }
 }
