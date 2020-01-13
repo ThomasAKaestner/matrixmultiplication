@@ -24,3 +24,6 @@ Post this json to the API "/matrixmulti" data={"m1":[[2,3],[7,4]],"m2":[[213,233
 * Visual Studio Code
 * Post Man
 * GIT
+* tested the matrix calc with: https://matrixcalc.org/
+
+## NOTE: always update composer

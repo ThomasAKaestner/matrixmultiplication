@@ -10,11 +10,8 @@ class MatrixMultiController extends Controller
 
     public function post(Request $request)
     {
-
         $data = $request->input("data");
-
         $data = json_decode($data);
-
         $matrix1 = $data->m1;
         $matrix2 = $data->m2;
         $key = "ouytuoba";
@@ -23,10 +20,14 @@ class MatrixMultiController extends Controller
         {
             return "Error: Matrix columns should be the same size.";
         }
-        dd($this->columnEqualRow($matrix1,$matrix2));
+
+        if(!$this->columnEqualRow($matrix1,$matrix2))
+        {
+            return "Error: blabla";
+        }
+        $this->matrixMultiplication($matrix1,$matrix2);
 
         return "yes";
-        
     }
 
     /**
@@ -72,13 +73,45 @@ class MatrixMultiController extends Controller
 
     private function matrixMultiplication($matrix1, $matrix2)
     {
-        foreach($matrix1 as $keyR1 => $row1)
+        $temp = null;
+        //row 
+        for($i = 0; $i < sizeOf($matrix1); $i++)
         {   
+            sizeOf($matrix1[$i]);
+            $q = null;
+            //column
+            for($n = 0; $n < sizeOf($matrix1[$i]); $n++)
+            {
+                
+                for($k = 0; $k < sizeOf($matrix2[$i]); $k++)
+                {
+                    
+                    if($q == null){
+                        $q = $n;
+                    }
+                    
+                    echo($matrix1[$i][$n]. " * ". $matrix2[$n][$k] . "<br>");
+                    $temp = $matrix1[$i][$n] * $matrix2[$n][$q];
+                    $n++;
+                
+                } 
+                dd($temp);
 
-            dd($row1);
+
+
+
+                echo($matrix1[$i][$n]);
+               
+               
+                // for($k = 0; $k < sizeOf($matrix2[$i]); $k++)
+                // {
+                //     $temp = $temp + $matrix1[$i][$n] * $matrix2[$i][$k];
+                // }
+                // dd($temp);
+                
+            }
             // foreach($matrix1 as $key)
             // {
-
 
             // }
 
