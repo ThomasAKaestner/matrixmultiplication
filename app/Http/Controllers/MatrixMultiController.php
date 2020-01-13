@@ -5,24 +5,92 @@ class MatrixMultiController extends Controller
 {
     public function get()
     {
-        dd("tests");
-        
+        dd("tests");        
     }
 
     public function post(Request $request)
     {
-        // dd($request);
-        $a1 = array('0' => array('0' =>  21, '1' => 73), '1' => array('0' => 35, '1' => 81 ) );
-        $a2 = array('0' => array('0' =>  32, '1' => 98), '1' => array('0' => 17, '1' => 7) );
-        // check if both matrix have the same height & width
-        $this->matrixCheck($a1);
+
+        $data = $request->input("data");
+
+        $data = json_decode($data);
+
+        $matrix1 = $data->m1;
+        $matrix2 = $data->m2;
+        $key = "ouytuoba";
+        // checks if the matrix has always the same column
+        if(!($this->matrixCheckColumn($matrix1)) || !($this->matrixCheckColumn($matrix2)))
+        {
+            return "Error: Matrix columns should be the same size.";
+        }
+        dd($this->columnEqualRow($matrix1,$matrix2));
+
+        return "yes";
+        
     }
 
-    private function matrixCheck($matrix)
+    /**
+     * The function matrixCheckColumn is checking if a matrix has the same column sizes & checks if the matrix consists only of integers/ numbers
+     * 
+     * @param $matrix / 2 demensional array 
+     * 
+     * @return boolean / returns true false 
+     */
+
+    private function matrixCheckColumn($matrix)
     {
-        foreach($matrix as $key => $value)
+        $fistColumnLength = null;
+        foreach($matrix as $keyR => $row)
         {
-            dd($value);
+            $fistColumnLength = ($fistColumnLength == null ?  sizeOf($row) : $fistColumnLength);
+            if($fistColumnLength !== sizeOf($row))
+            {
+                return false;
+            }
+            foreach($row as $keyC => $column)
+            {
+                if(is_int($column) == false)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This funcion checks if the column count in the first matrix is equal to the row count of the second matrix
+     */
+    private function columnEqualRow($matrix1, $matrix2)
+    {
+        if(sizeOf($matrix1[0]) == sizeOf($matrix2))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private function matrixMultiplication($matrix1, $matrix2)
+    {
+        foreach($matrix1 as $keyR1 => $row1)
+        {   
+
+            dd($row1);
+            // foreach($matrix1 as $key)
+            // {
+
+
+            // }
+
         }
     }
+
+    private function matrixToAlpabet($matrix)
+    {
+
+
+
+
+    }
+
 }

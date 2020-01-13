@@ -14,3 +14,6 @@ The resulting matrix should contain characters rather than numbers, similar to e
 * At least PHP 7.2 for coding 
 * PSR-2 coding standard
 * strict type hinting
+
+## Testing
+Post this json to the API "/matrixmulti" data={"m1":[[2,3],[7,4]],"m2":[[213,233],[23,23]] }
