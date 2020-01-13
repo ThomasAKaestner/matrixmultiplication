@@ -17,3 +17,10 @@ The resulting matrix should contain characters rather than numbers, similar to e
 
 ## Testing
 Post this json to the API "/matrixmulti" data={"m1":[[2,3],[7,4]],"m2":[[213,233],[23,23]] }
+
+## Tech Stack 
+* Laravel Lumen
+* PHP7
+* Visual Studio Code
+* Post Man
+* GIT
