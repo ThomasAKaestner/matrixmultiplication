@@ -3,14 +3,10 @@ namespace App\Http\Controllers;
 /**
  * using Request for http post requests
  */
-
 use Illuminate\Http\Request;
 
-
 /**
- * the class MatrixMultiController is 
- * 
- * 
+ * the class MatrixMultiController is for matrix multiplication
  */
 class MatrixMultiController extends Controller
 {
@@ -21,11 +17,9 @@ class MatrixMultiController extends Controller
         <br>As you can see from the request, the api key is XOzTd4KJOq.
         <br> I also wrote a test. You can simply get the test when you open the /matrixmulti/test via a get.
         <br>I hope you find my solution ok and i am happy to hear from you soon.
-        <br> More information is in my read.me file -> https://github.com/ThomasAKaestner/XXX
+        <br> More information is in my read.me file -> https://github.com/ThomasAKaestner/matrixmultiplication
         <br> Best regards Thomas
         '; 
-        
-        
     }
 
     public function post(Request $request)
@@ -66,7 +60,6 @@ class MatrixMultiController extends Controller
      */
     public function test()
     {
-        
         $matrix1 = array([2,3],[7,4]);
         echo("Matrix A:  ");
         print_r($matrix1);

@@ -15,9 +15,15 @@ The resulting matrix should contain characters rather than numbers, similar to e
 * PSR-2 coding standard
 * strict type hinting
 
-## Testing
-Post this json to the API "/matrixmulti" data={"m1":[[2,3],[7,4]],"m2":[[213,233],[23,23]] }
-    data={"m1":[[2,3],[7,4]],"m2":[[1,4],[3,6]] }
+## How to call the API
+* post Request
+* URL/API: "/matrixmulti"
+* API-key: key=XOzTd4KJOq
+* two matrices: data={"m1":[[2,3],[7,4]],"m2":[[1,4],[3,6]]}
+
+## Visuell Testing
+* I wrote a Test with two matrices
+* You can call the test via "/matrixmulti/test" with a get request
 
 ## Tech Stack 
 * Laravel Lumen
@@ -26,5 +32,3 @@ Post this json to the API "/matrixmulti" data={"m1":[[2,3],[7,4]],"m2":[[213,233
 * Post Man
 * GIT
 * tested the matrix calc with: https://matrixcalc.org/
-
-## NOTE: always update composer
