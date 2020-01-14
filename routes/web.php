@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,4 +17,5 @@ $router->get('/', function () use ($router) {
 
 
 $router->get('/matrixmulti',"MatrixMultiController@get");
-$router->post("/matrixmulti","MatrixMultiController@post");
+$router->post("/matrixmulti",["middleware"=> "auth","uses"=> "MatrixMultiController@post"]);
+$router->post("/matrixmulti/test",["middleware"=> "auth","uses"=> "MatrixMultiController@test"]);

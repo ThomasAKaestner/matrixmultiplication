@@ -35,10 +35,12 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        $key = $request->key;
+        if($key !== "XOzTd4KJOq" || is_null($key))
+        {
+            $response = array("http_response"=>401,["error"=>"Unauthenticated","message"=>"the api key is wrong/not set"]);
+            return json_encode($response);
         }
-
         return $next($request);
     }
 }

@@ -16,7 +16,7 @@ class MatrixMultiController extends Controller
 {
     public function get()
     {
-        return "Hello Christian,";      
+        return "Hello Christian";      
     }
 
     public function post(Request $request)
@@ -50,6 +50,11 @@ class MatrixMultiController extends Controller
         $result = $this->matrixToAlphabet($matrix3);
         $response = array("http_response"=>200,[$result]);
         return $response;
+    }
+
+    public function test(Request $request)
+    {
+        return "test";
     }
 
     /**
