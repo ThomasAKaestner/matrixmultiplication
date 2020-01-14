@@ -22,8 +22,8 @@ The resulting matrix should contain characters rather than numbers, similar to e
 * two matrices: data={"m1":[[2,3],[7,4]],"m2":[[1,4],[3,6]]}
 * example request body: data={"m1":[[2,3],[7,4],[1,6]],"m2":[[1,4,123],[3,6,14]] }&key=XOzTd4KJOq
 
-## Visuall Test
-* I wrote a visuall test with two matrices
+## Visual Test
+* I wrote a visual test with two matrices
 * You can call the test via "/matrixmulti/test" with a get request
 
 ## Tech Stack 
