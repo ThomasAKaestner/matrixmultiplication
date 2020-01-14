@@ -16,7 +16,16 @@ class MatrixMultiController extends Controller
 {
     public function get()
     {
-        return "Hello Christian";      
+        return "Hello Christian, <br> Welcome to this small matrix multiplication api.<br><br>You can call the api on /matrixmulti via a post request.<br>
+        The request should look like this:XXX 
+        <br>As you can see from the request, the api key is XOzTd4KJOq.
+        <br> I also wrote a test. You can simply get the test when you open the /matrixmulti/test via a get.
+        <br>I hope you find my solution ok and i am happy to hear from you soon.
+        <br> More information is in my read.me file -> https://github.com/ThomasAKaestner/XXX
+        <br> Best regards Thomas
+        "; 
+        
+        
     }
 
     public function post(Request $request)
