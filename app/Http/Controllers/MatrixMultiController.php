@@ -1,32 +1,55 @@
 <?php
 namespace App\Http\Controllers;
+/**
+ * using Request for http post requests
+ */
+
 use Illuminate\Http\Request;
+
+
+/**
+ * the class MatrixMultiController is 
+ * 
+ * 
+ */
 class MatrixMultiController extends Controller
 {
     public function get()
     {
-        dd("tests");        
+        return "Hello Christian,";      
     }
 
     public function post(Request $request)
     {
         $data = $request->input("data");
+        $key = $request->input("key");
+        if($key !== "XOzTd4KJOq")
+        {
+            $response = array("http_response"=>401,["error"=>"Unauthenticated","message"=>"the api key is wrong/not set"]);
+            return json_encode($response);
+        }
+        if(is_null($data))
+        {
+            $response = array("http_response"=>400,["error"=>"Bad Request","message"=>"the parameter data is empty"]);
+            return json_encode($response);
+        }
         $data = json_decode($data);
         $matrix1 = $data->m1;
-        
         $matrix2 = $data->m2;
-        $key = "ouytuoba";
-        // checks if the matrix has always the same column
         if(!($this->matrixCheckColumn($matrix1)) || !($this->matrixCheckColumn($matrix2)))
         {
-            return "Error: Matrix columns should be the same size.";
+            $response = array("http_response"=>400,["error"=>"Bad Request","message"=>"a matrix has not the same column size"]);
+            return json_encode($response);
         }
         if(!$this->columnEqualRow($matrix1,$matrix2))
         {
-            return "Error: blabla";
+            $response = array("http_response"=>400,["error"=>"Bad Request","message"=>"the column count in the first matrix is not equal to the row count of the second matrix"]);
+            return json_encode($response);
         }
         $matrix3 = $this->matrixMultiplication($matrix1,$matrix2);
-        return $this->matrixToAlpabet($matrix3);
+        $result = $this->matrixToAlphabet($matrix3);
+        $response = array("http_response"=>200,[$result]);
+        return $response;
     }
 
     /**
@@ -53,6 +76,9 @@ class MatrixMultiController extends Controller
 
     /**
      * This funcion checks if the column count in the first matrix is equal to the row count of the second matrix
+     * @param $matrix1 stands for the first matrix
+     * @param $matrix2 stands for the second matrix
+     * @return boolean
      */
     private function columnEqualRow($matrix1, $matrix2)
     {
@@ -61,9 +87,14 @@ class MatrixMultiController extends Controller
             return true;
         }
         return false;
-
     }
 
+    /**
+     * The function matrixMultiplication is multiplying matrix1 with matrix2
+     * @param $matrix1 stands for the first matrix
+     * @param $matrix2 stands for the second matrix
+     * @return $matrix3 stands for the resulting matrix
+     */
     private function matrixMultiplication($matrix1, $matrix2)
     {
         $matrix3 = array();
@@ -81,7 +112,12 @@ class MatrixMultiController extends Controller
         return $matrix3;
     }
 
-    private function matrixToAlpabet($matrix)
+    /**
+     * The function matrixToAlphabet is converting an integer matrix into a matrix consisting of chars
+     * @param $matrix is a matrix consisting of numbers/ integers
+     * @return $result is a matrix consisting of chars
+     */
+    private function matrixToAlphabet($matrix)
     {   
         $result = array();
         foreach($matrix as $keyR => $row)
@@ -91,12 +127,24 @@ class MatrixMultiController extends Controller
                 $result[$keyR][$keyC] = $this->integerToChar($column); 
             }
         }
+        return $result;
     }
 
+    /**
+     * The function integerToChar is converting an integer to a character. for example: 1 => A, 26 => Z, 27 => AA, 28 => AB.
+     * @param $param stands for an integer 
+     * @return $text stands for a string consisting of one or more characters
+     */
     private function integerToChar($param)
     {
-
-        $rest = 26;
-        dd($rest);
+        $text = "";
+        while ($param > 0)
+        {
+            $currentLetterNumber = ($param - 1) % 26;
+            $currentLetter = chr($currentLetterNumber + 65);
+            $text = $currentLetter. $text;
+            $param = ($param - ($currentLetterNumber + 1)) / 26;
+        }
+        return $text;
     }
 }
