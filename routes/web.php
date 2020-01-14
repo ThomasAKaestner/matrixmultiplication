@@ -11,11 +11,9 @@ use Illuminate\Http\Request;
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/', "MatrixMultiController@get");
 
 
 $router->get('/matrixmulti',"MatrixMultiController@get");
 $router->post("/matrixmulti",["middleware"=> "auth","uses"=> "MatrixMultiController@post"]);
-$router->post("/matrixmulti/test",["middleware"=> "auth","uses"=> "MatrixMultiController@test"]);
+$router->get("/matrixmulti/test","MatrixMultiController@test");

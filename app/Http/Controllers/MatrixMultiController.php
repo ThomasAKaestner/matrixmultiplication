@@ -16,14 +16,14 @@ class MatrixMultiController extends Controller
 {
     public function get()
     {
-        return "Hello Christian, <br> Welcome to this small matrix multiplication api.<br><br>You can call the api on /matrixmulti via a post request.<br>
-        The request should look like this:XXX 
+        return 'Hello Christian, <br> Welcome to this small matrix multiplication api.<br><br>You can call the api on /matrixmulti via a post request.<br>
+        The request should look like this: data={"m1":[[2,3],[7,4],[1,6]],"m2":[[1,4,123],[3,6,14]] }&key=XOzTd4KJOq
         <br>As you can see from the request, the api key is XOzTd4KJOq.
         <br> I also wrote a test. You can simply get the test when you open the /matrixmulti/test via a get.
         <br>I hope you find my solution ok and i am happy to hear from you soon.
         <br> More information is in my read.me file -> https://github.com/ThomasAKaestner/XXX
         <br> Best regards Thomas
-        "; 
+        '; 
         
         
     }
@@ -60,10 +60,35 @@ class MatrixMultiController extends Controller
         $response = array("http_response"=>200,[$result]);
         return $response;
     }
-
-    public function test(Request $request)
+    /**
+     * This is a test function which is called via the url /matrixmulti/test for a visuell test.
+     * 
+     */
+    public function test()
     {
-        return "test";
+        
+        $matrix1 = array([2,3],[7,4]);
+        echo("Matrix A:  ");
+        print_r($matrix1);
+        $matrix2 = array([1,4],[2,8]);
+        echo("<br>Matrix B:  ");
+        print_r($matrix2);
+        if(!($this->matrixCheckColumn($matrix1)) || !($this->matrixCheckColumn($matrix2)))
+        {
+            $response = array("http_response"=>400,["error"=>"Bad Request","message"=>"a matrix has not the same column size"]);
+            return json_encode($response);
+        }
+        if(!$this->columnEqualRow($matrix1,$matrix2))
+        {
+            $response = array("http_response"=>400,["error"=>"Bad Request","message"=>"the column count in the first matrix is not equal to the row count of the second matrix"]);
+            return json_encode($response);
+        }
+        $matrix3 = $this->matrixMultiplication($matrix1,$matrix2);
+        echo("<br><br><br>Result matrix after matrix multiplication:<br> Result Matrix C: ");
+        print_r($matrix3);
+        $result = $this->matrixToAlphabet($matrix3);
+        echo("<br><br><br>Matrix C converted to Alphabet Char:");
+        print_r($result);
     }
 
     /**
