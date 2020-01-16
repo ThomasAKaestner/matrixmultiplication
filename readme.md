@@ -30,6 +30,6 @@ The resulting matrix should contain characters rather than numbers, similar to e
 * Laravel Lumen
 * PHP7
 * Visual Studio Code
-* Post Man
+* PostMan https://www.getpostman.com/
 * GIT
 * tested the matrix calc with: https://matrixcalc.org/

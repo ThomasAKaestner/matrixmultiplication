@@ -17,7 +17,7 @@ class MatrixMultiController extends Controller
         <br>As you can see from the request, the api key is XOzTd4KJOq.
         <br> I also wrote a test. You can simply get the test when you open the /matrixmulti/test via a get.
         <br>I hope you find my solution ok and i am happy to hear from you soon.
-        <br> More information is in my read.me file -> https://github.com/ThomasAKaestner/matrixmultiplication
+        <br> More information is in my read.me file -> <a href="https://github.com/ThomasAKaestner/matrixmultiplication">https://github.com/ThomasAKaestner/matrixmultiplication</a>
         <br> Best regards Thomas
         '; 
     }
