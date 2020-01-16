@@ -24,6 +24,8 @@ class MatrixMultiController extends Controller
 
     public function post(Request $request)
     {
+
+
         $data = $request->input("data");
         $key = $request->input("key");
         if($key !== "XOzTd4KJOq")
