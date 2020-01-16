@@ -24,8 +24,6 @@ class MatrixMultiController extends Controller
 
     public function post(Request $request)
     {
-
-
         $data = $request->input("data");
         $key = $request->input("key");
         if($key !== "XOzTd4KJOq")
@@ -94,7 +92,7 @@ class MatrixMultiController extends Controller
      * @return boolean / returns true false 
      */
 
-    private function matrixCheckColumn($matrix)
+    private function matrixCheckColumn(array $matrix)
     {
         $fistColumnLength = null;
         foreach($matrix as $keyR => $row)
@@ -114,7 +112,7 @@ class MatrixMultiController extends Controller
      * @param $matrix2 stands for the second matrix
      * @return boolean
      */
-    private function columnEqualRow($matrix1, $matrix2)
+    private function columnEqualRow(array $matrix1, array $matrix2)
     {
         if(sizeOf($matrix1) == sizeOf($matrix2[0]))
         {
@@ -129,7 +127,7 @@ class MatrixMultiController extends Controller
      * @param $matrix2 stands for the second matrix
      * @return $matrix3 stands for the resulting matrix
      */
-    private function matrixMultiplication($matrix1, $matrix2)
+    private function matrixMultiplication(array $matrix1, array $matrix2)
     {
         $matrix3 = array();
         for($i=0; $i < sizeOf($matrix1); $i++)
@@ -151,7 +149,7 @@ class MatrixMultiController extends Controller
      * @param $matrix is a matrix consisting of numbers/ integers
      * @return $result is a matrix consisting of chars
      */
-    private function matrixToAlphabet($matrix)
+    private function matrixToAlphabet(array $matrix)
     {   
         $result = array();
         foreach($matrix as $keyR => $row)
@@ -169,7 +167,7 @@ class MatrixMultiController extends Controller
      * @param $param stands for an integer 
      * @return $text stands for a string consisting of one or more characters
      */
-    private function integerToChar($param)
+    private function integerToChar(int $param)
     {
         $text = "";
         while ($param > 0)
